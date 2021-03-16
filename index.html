@@ -25,10 +25,21 @@
           ></textarea>
         </div>
         <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+          <button id="generate" class="btn" onclick="openForm()">Generate Password</button>
         </div>
       </div>
     </div>
+
+    <!-- popup form for entering password details -->
+    <div class="form-popup" id="passwordForm">
+      <form action="/action_page.php" class="form-container">
+        <h1>Please enter the criteria you desire for your password</h1>
+    
+        <button type="submit" class="btn">Submit</button>
+        <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
