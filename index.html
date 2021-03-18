@@ -36,32 +36,37 @@
         
         <h1>Please enter the criteria you desire for your password</h1>
 
+        <p> What <strong>LENGTH</strong> (# characters) do you want your password to be?</p>
+        <div class="slidecontainer">
+          <input type="range" min="8" max="128" value="8" class="slider" id="passwordRange">
+          <span>Value: <span id="currentValue"></span></span>
+        </div>
+
+        
         <div class="switchesBox">
-          <p> Do you want UPPERCASE characters in your password?</p>
+          <p> Do you want <strong>UPPERCASE</strong>> characters in your password?</p>
           <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
+            <input type="checkbox" id="upperCase">
+            <span class="toggle round"></span>
           </label>
-          <p> Do you want LOWERCASE characters in your password?</p>
+          <p> Do you want <strong>LOWERCASE</strong>> characters in your password?</p>
           <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
+            <input type="checkbox" id="lowerCase">
+            <span class="toggle round"></span>
           </label>
-          <p> Do you want NUMERIC characters in your password?</p>
+          <p> Do you want <strong>NUMERIC</strong>> characters in your password?</p>
           <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
+            <input type="checkbox" id="numeric">
+            <span class="toggle round"></span>
           </label>
-          <p> Do you want SPECIAL (e.g. /, #, etc.) characters in your password?</p>
+          <p> Do you want <strong>SPECIAL</strong> (e.g. /, #, etc.) characters in your password?</p>
           <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
+            <input type="checkbox" id="special">
+            <span class="toggle round"></span>
           </label>
   
         </div>
 
-
-        
     
         <button type="submit" class="btn" id="btnSubmit" onclick="submitForm()">Submit</button>
         <button type="submit" class="btn"  id="btnCancel" onclick="closeForm()">Close</button>

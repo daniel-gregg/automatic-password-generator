@@ -25,6 +25,9 @@ function closeForm() {
   document.getElementById("card").style.display = "block";
 }
 // generatePassword function
+function writePassword () {
+  
+}
 
 function submitForm(){
   event.preventDefault();
