@@ -10,13 +10,12 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
 function openForm() {
   event.preventDefault();
   document.getElementById("card").style.display = "none";
   document.getElementById("passwordForm").style.display = "block";
+  document.getElementById("lowerCase").value=true;
 }
 
 function closeForm() {
@@ -24,6 +23,7 @@ function closeForm() {
   document.getElementById("passwordForm").style.display = "none"; 
   document.getElementById("card").style.display = "block";
 }
+
 
 
 // generatePassword function
@@ -37,6 +37,14 @@ document.getElementById("btnSubmit").addEventListener("click",function(){
   lowerCase = document.getElementById("lowerCase").checked;
   numeric = document.getElementById("numeric").checked;
   special = document.getElementById("special").checked;
+
+  //First check that at least one toggle is checked
+  arr1 = [lowerCase, upperCase, numeric, special];
+  let checker = arr => arr.every(v => v === false);
+  if(checker(arr1)){
+    window.alert("Please select at least one option!");
+    return
+  }
 
   //Setting the arrays of characters that may be used in the password
   a="abcdefghijklmnopqrstuvwxyz"; //setting lowercase alphabet
@@ -81,7 +89,7 @@ document.getElementById("btnSubmit").addEventListener("click",function(){
 
   //then close the window and print password to the password text area
   document.getElementById("card").style.display = "block";
-  document.getElementById("password").textContent=passwordString;/
+  document.getElementById("password").textContent=passwordString;
   document.getElementById("passwordForm").style.display = "none";
 });
 
