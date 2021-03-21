@@ -1,57 +1,34 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
-  //var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  //passwordText.value = password;
-
-}
-
-
-function openForm() {
-  event.preventDefault();
-  document.getElementById("card").style.display = "none";
-  document.getElementById("passwordForm").style.display = "block";
-  document.getElementById("lowerCase").value=true;
-}
-
-function closeForm() {
-  event.preventDefault();
-  document.getElementById("passwordForm").style.display = "none"; 
-  document.getElementById("card").style.display = "block";
-}
-
-
+//Setting the arrays of characters that may be used in the password
+const a="abcdefghijklmnopqrstuvwxyz"; //setting lowercase alphabet
+const A=a.toUpperCase();                //setting uppercase alphabet
+const specialChar = ' !"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~'; //special characters
+const numbers = "0123456789";
 
 // generatePassword function
 document.getElementById("btnSubmit").addEventListener("click",function(){
   event.preventDefault();
   event.stopPropagation();
 
-  // do some stuff here to generate password based on form entry details
-  passwordLength = document.getElementById("passwordRange").value;
-  upperCase = document.getElementById("upperCase").checked;
-  lowerCase = document.getElementById("lowerCase").checked;
-  numeric = document.getElementById("numeric").checked;
-  special = document.getElementById("special").checked;
+  passwordLength = document.getElementById("passwordRange").value;  //target password length (integer)
+  upperCase = document.getElementById("upperCase").checked;         //use upper case letters? (boolean)
+  lowerCase = document.getElementById("lowerCase").checked;         //use lower case letters? (boolean)
+  numeric = document.getElementById("numeric").checked;             //use numeric characters? (boolean)
+  special = document.getElementById("special").checked;             //use 'special' characters? (boolean)
 
-  //First check that at least one toggle is checked
-  arr1 = [lowerCase, upperCase, numeric, special];
-  let checker = arr => arr.every(v => v === false);
-  if(checker(arr1)){
-    window.alert("Please select at least one option!");
-    return
-  }
+  //check that at least one argument is selected 'true' for password criteria. Return alert if not.
+  checkAnyTrue();
 
-  //Setting the arrays of characters that may be used in the password
-  a="abcdefghijklmnopqrstuvwxyz"; //setting lowercase alphabet
-  A=a.toUpperCase();                //setting uppercase alphabet
-  specialChar = ' !"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~'; //special characters
-  numbers = "0123456789";
+  // call the generate password function
+  genPassword();                                                  
 
+  // return to main screen
+  toggleForm();
+})
+
+let genPassword = function(){
   //initialising an empty array to hold the selected character arrays
   passwordArray = [];
 
@@ -87,18 +64,49 @@ document.getElementById("btnSubmit").addEventListener("click",function(){
     passwordString+=char;  //Add the new character to the password - loop until password length is achieved
   }
 
-  //then close the window and print password to the password text area
-  document.getElementById("card").style.display = "block";
-  document.getElementById("password").textContent=passwordString;
-  document.getElementById("passwordForm").style.display = "none";
-});
+  document.getElementById("password").textContent=passwordString;   // print password to password text area
+}
 
-// Show current slider value in the popup
+// Show current slider value in the popup form
 var slider = document.getElementById("passwordRange");
 var output = document.getElementById("currentValue");
 output.innerHTML = slider.value; // Display the default slider value
 
-// Update the current slider value (each time you drag the slider handle)
+// Update the current slider value (each time you drag the slider handle) in the popup form
 slider.oninput = function() {
   output.innerHTML = this.value;
+}
+
+//toggles display between popup form (for password selection) and main page
+function toggleForm() {
+  if(document.getElementById("card").style.display == "none"){
+    document.getElementById("card").style.display = "block";  //display main page
+    document.getElementById("passwordForm").style.display = "none";  //stop displaying form
+  } else {
+    document.getElementById("card").style.display = "none";  //stop displaying main page
+    document.getElementById("passwordForm").style.display = "block";  //display form
+  }
+}
+
+function checkAnyTrue(){
+  //checks that at least one toggle is checked
+  arr1 = [lowerCase, upperCase, numeric, special];                  //array of arrays to enable simple random selections
+  let checker = arr => arr.every(v => v === false);                 //check that at least one option is selected
+  if(checker(arr1)){
+    window.alert("Please select at least one option!");             //   --> if not send alert as window popup
+    return
+  }
+}
+
+// open popup form to enter password criteria
+function openForm() {
+  event.preventDefault();
+  toggleForm();
+  document.getElementById("password").textContent="";  // clear the password text area
+}
+
+// close form without generating a new password
+function closeForm() {
+  event.preventDefault();
+  toggleForm();
 }
