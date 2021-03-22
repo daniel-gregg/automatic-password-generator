@@ -7,7 +7,7 @@ const A=a.toUpperCase();                //setting uppercase alphabet
 const specialChar = ' !"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~'; //special characters
 const numbers = "0123456789";
 
-// generatePassword function
+// submit button event does some checks, calls password generator function and returns to main screen.
 document.getElementById("btnSubmit").addEventListener("click",function(){
   event.preventDefault();
   event.stopPropagation();
@@ -64,7 +64,8 @@ let genPassword = function(){
     passwordString+=char;  //Add the new character to the password - loop until password length is achieved
   }
 
-  document.getElementById("password").textContent=passwordString;   // print password to password text area
+  passwordShuffle = shuffle(passwordString.split("")).join("");  //shuffle password string randomly
+  document.getElementById("password").textContent=passwordShuffle;   // print password to password text area
 }
 
 // Show current slider value in the popup form
@@ -97,6 +98,26 @@ function checkAnyTrue(){
     return
   }
 }
+
+//Function to shuffle array using Fisher-Yates algorithm from bost.ocks.org/mike/shuffle
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
+
 
 // open popup form to enter password criteria
 function openForm() {
