@@ -20,7 +20,7 @@ document.getElementById("btnSubmit").addEventListener("click",function(){
 
   //check that at least one argument is selected 'true' for password criteria. Return alert if not.
   checkAnyTrue();
-
+  
   // call the generate password function
   genPassword();                                                  
 
@@ -57,7 +57,7 @@ let genPassword = function(){
   //Set length of the base string with minimum character requirements
   len = passwordString.length;
 
-  //For loop to build password for remaining length
+  //For loop to build password for remaining length of password string
   for(i=len; i < passwordLength; i++) {
     charArray = passwordArray[Math.floor(Math.random()*passwordArray.length)];  //randomly select which type of character to append;
     char = charArray[Math.floor(Math.random()*charArray.length)]; //Select the character from the character array type
@@ -95,7 +95,7 @@ function checkAnyTrue(){
   let checker = arr => arr.every(v => v === false);                 //check that at least one option is selected
   if(checker(arr1)){
     window.alert("Please select at least one option!");             //   --> if not send alert as window popup
-    return
+    return checker
   }
 }
 
